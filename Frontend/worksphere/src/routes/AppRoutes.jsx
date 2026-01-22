@@ -1,9 +1,10 @@
-import React from 'react'
+import { Routes, Route } from "react-router-dom";
+import Register from "../pages/Register";
 
-function AppRoutes() {
+export default function AppRoutes() {
   return (
-    <div>AppRoutes</div>
-  )
+    <Routes>
+      <Route path="/register" element={<Register />} />
+    </Routes>
+  );
 }
-
-export default AppRoutes

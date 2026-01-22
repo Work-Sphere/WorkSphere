@@ -2,6 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
+<<<<<<< HEAD
    <><div className="container">
       <footer className="py-5">
         <div className="row">
@@ -69,6 +70,9 @@ function Footer() {
       </footer>
     </div>
     </>
+=======
+    <div>Footer</div>
+>>>>>>> 5d1693d49d8fd454287765d51f1b4eae842c8de4
   )
 }
 

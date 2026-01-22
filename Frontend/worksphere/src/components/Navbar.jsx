@@ -3,6 +3,7 @@ import React from 'react'
 function Navbar() {
   return (
     <>
+<<<<<<< HEAD
     <header className ="p-3 bg-dark text-white fixed-top">
     <div className="container">
       <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -29,6 +30,9 @@ function Navbar() {
       </div>
     </div>
   </header>
+=======
+    <h1>WorkSphere</h1>
+>>>>>>> 5d1693d49d8fd454287765d51f1b4eae842c8de4
     </>
   )
 }

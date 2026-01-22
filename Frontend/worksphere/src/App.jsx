@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
@@ -16,6 +17,17 @@ function App() {
     </div>
     </>
   )
+=======
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
+>>>>>>> 5d1693d49d8fd454287765d51f1b4eae842c8de4
 }
 
-export default App
+export default App;
