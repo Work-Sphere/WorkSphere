@@ -4,7 +4,7 @@ USE `p14_worksphere`;
 --
 -- Host: localhost    Database: p14_worksphere
 -- ------------------------------------------------------
--- Server version	8.2.0
+-- Server version	8.0.43
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -17,11 +17,9 @@ USE `p14_worksphere`;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
 --
 -- Table structure for table `bill`
 --
-
 
 DROP TABLE IF EXISTS `bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -40,7 +38,7 @@ CREATE TABLE `bill` (
   KEY `bill_ibfk_2` (`service_id`),
   CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uid`),
   CONSTRAINT `bill_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +47,6 @@ CREATE TABLE `bill` (
 
 LOCK TABLES `bill` WRITE;
 /*!40000 ALTER TABLE `bill` DISABLE KEYS */;
-INSERT INTO `bill` VALUES (1,4,1,5000.00,900.00,5900.00,'2023-10-01','Paid'),(2,5,2,2500.00,450.00,2950.00,'2023-10-05','Unpaid');
 /*!40000 ALTER TABLE `bill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +64,7 @@ CREATE TABLE `city` (
   PRIMARY KEY (`city_id`),
   KEY `city_ibfk_1` (`state_id`),
   CONSTRAINT `city_ibfk_1` FOREIGN KEY (`state_id`) REFERENCES `state` (`state_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +73,7 @@ CREATE TABLE `city` (
 
 LOCK TABLES `city` WRITE;
 /*!40000 ALTER TABLE `city` DISABLE KEYS */;
-INSERT INTO `city` VALUES (1,1,'Mumbai'),(2,1,'Pune'),(3,2,'Bangalore'),(4,3,'Ahmedabad');
+INSERT INTO `city` VALUES (1,1,'Visakhapatnam'),(2,1,'Vijayawada'),(3,1,'Guntur'),(4,1,'Nellore'),(5,1,'Kurnool'),(6,2,'Guwahati'),(7,2,'Silchar'),(8,2,'Dibrugarh'),(9,2,'Jorhat'),(10,2,'Tezpur'),(11,3,'Patna'),(12,3,'Gaya'),(13,3,'Bhagalpur'),(14,3,'Muzaffarpur'),(15,3,'Purnia'),(16,4,'Raipur'),(17,4,'Bhilai'),(18,4,'Bilaspur'),(19,4,'Korba'),(20,4,'Durg'),(21,5,'New Delhi'),(22,5,'Dwarka'),(23,5,'Rohini'),(24,5,'Saket'),(25,5,'Karol Bagh'),(26,6,'Panaji'),(27,6,'Margao'),(28,6,'Vasco da Gama'),(29,6,'Mapusa'),(30,6,'Ponda'),(31,7,'Ahmedabad'),(32,7,'Surat'),(33,7,'Vadodara'),(34,7,'Rajkot'),(35,7,'Bhavnagar'),(36,8,'Gurgaon'),(37,8,'Faridabad'),(38,8,'Panipat'),(39,8,'Ambala'),(40,8,'Karnal'),(41,9,'Shimla'),(42,9,'Dharamshala'),(43,9,'Mandi'),(44,9,'Solan'),(45,9,'Kullu'),(46,10,'Ranchi'),(47,10,'Jamshedpur'),(48,10,'Dhanbad'),(49,10,'Bokaro'),(50,10,'Deoghar'),(51,11,'Bangalore'),(52,11,'Mysore'),(53,11,'Mangalore'),(54,11,'Hubli'),(55,11,'Belgaum'),(56,12,'Thiruvananthapuram'),(57,12,'Kochi'),(58,12,'Kozhikode'),(59,12,'Thrissur'),(60,12,'Kannur'),(61,13,'Bhopal'),(62,13,'Indore'),(63,13,'Jabalpur'),(64,13,'Gwalior'),(65,13,'Ujjain'),(66,14,'Mumbai'),(67,14,'Pune'),(68,14,'Nagpur'),(69,14,'Nashik'),(70,14,'Aurangabad'),(71,15,'Bhubaneswar'),(72,15,'Cuttack'),(73,15,'Rourkela'),(74,15,'Puri'),(75,15,'Sambalpur'),(76,16,'Ludhiana'),(77,16,'Amritsar'),(78,16,'Jalandhar'),(79,16,'Patiala'),(80,16,'Bathinda'),(81,17,'Jaipur'),(82,17,'Jodhpur'),(83,17,'Udaipur'),(84,17,'Kota'),(85,17,'Ajmer'),(86,18,'Chennai'),(87,18,'Coimbatore'),(88,18,'Madurai'),(89,18,'Trichy'),(90,18,'Salem'),(91,19,'Hyderabad'),(92,19,'Warangal'),(93,19,'Nizamabad'),(94,19,'Karimnagar'),(95,19,'Khammam'),(96,20,'Lucknow'),(97,20,'Kanpur'),(98,20,'Varanasi'),(99,20,'Agra'),(100,20,'Noida');
 /*!40000 ALTER TABLE `city` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +95,7 @@ CREATE TABLE `complaints` (
   KEY `complaints_ibfk_2` (`service_id`),
   CONSTRAINT `complaints_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uid`),
   CONSTRAINT `complaints_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +104,6 @@ CREATE TABLE `complaints` (
 
 LOCK TABLES `complaints` WRITE;
 /*!40000 ALTER TABLE `complaints` DISABLE KEYS */;
-INSERT INTO `complaints` VALUES (1,4,2,'Design was not as per requirements.','2023-10-15'),(2,5,1,'Website has some minor bugs.','2023-10-20');
 /*!40000 ALTER TABLE `complaints` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +129,7 @@ CREATE TABLE `rating` (
   CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`from_user_id`) REFERENCES `user` (`uid`),
   CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`to_user_id`) REFERENCES `user` (`uid`),
   CONSTRAINT `rating_ibfk_3` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +138,6 @@ CREATE TABLE `rating` (
 
 LOCK TABLES `rating` WRITE;
 /*!40000 ALTER TABLE `rating` DISABLE KEYS */;
-INSERT INTO `rating` VALUES (1,4,2,1,5,'Excellent web development work!','2023-10-01'),(2,5,3,2,4,'Good graphic design, but delivery was a bit late.','2023-10-05'),(3,4,3,3,5,'Very professional writing.','2023-10-10');
 /*!40000 ALTER TABLE `rating` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +201,7 @@ CREATE TABLE `state` (
   `state_id` int NOT NULL AUTO_INCREMENT,
   `stateName` varchar(100) NOT NULL,
   PRIMARY KEY (`state_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +210,7 @@ CREATE TABLE `state` (
 
 LOCK TABLES `state` WRITE;
 /*!40000 ALTER TABLE `state` DISABLE KEYS */;
-INSERT INTO `state` VALUES (1,'Maharashtra'),(2,'Karnataka'),(3,'Gujarat');
+INSERT INTO `state` VALUES (1,'Andhra Pradesh'),(2,'Assam'),(3,'Bihar'),(4,'Chhattisgarh'),(5,'Delhi'),(6,'Goa'),(7,'Gujarat'),(8,'Haryana'),(9,'Himachal Pradesh'),(10,'Jharkhand'),(11,'Karnataka'),(12,'Kerala'),(13,'Madhya Pradesh'),(14,'Maharashtra'),(15,'Odisha'),(16,'Punjab'),(17,'Rajasthan'),(18,'Tamil Nadu'),(19,'Telangana'),(20,'Uttar Pradesh');
 /*!40000 ALTER TABLE `state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +240,7 @@ CREATE TABLE `user` (
   CONSTRAINT `city` FOREIGN KEY (`city`) REFERENCES `city` (`city_id`),
   CONSTRAINT `rid` FOREIGN KEY (`rid`) REFERENCES `role` (`rid`),
   CONSTRAINT `state` FOREIGN KEY (`state`) REFERENCES `state` (`state_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,7 +249,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,'Amit','Sharma','amit@example.com','pass123','9876543210',1,'123 Admin Lane',1,1),(2,2,'Rahul','Verma','rahul@example.com','rahul123','9876543211',1,'45 Freelance St',1,2),(3,2,'Priya','Singh','priya@example.com','priya123','9876543212',1,'78 Design Rd',2,3),(4,3,'Suresh','Patel','suresh@example.com','suresh123','9876543213',1,'12 Client Ave',3,4),(5,3,'Anjali','Nair','anjali@example.com','anjali123','9876543214',1,'34 Client Blvd',4,5);
+INSERT INTO `user` VALUES (1,3,'Vedant','Gawande','vedant@gmail.com','$2a$11$gF53mSq8sfHi6TyO38wyd.8XvwPJ8ZgT5RfMRp5zyL7.Yq2XZKFGK','9999999999',1,'Pune',1,2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +272,7 @@ CREATE TABLE `user_services` (
   KEY `user_services_ibfk_2` (`service_id`),
   CONSTRAINT `user_services_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uid`),
   CONSTRAINT `user_services_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,7 +281,6 @@ CREATE TABLE `user_services` (
 
 LOCK TABLES `user_services` WRITE;
 /*!40000 ALTER TABLE `user_services` DISABLE KEYS */;
-INSERT INTO `user_services` VALUES (1,2,1,5000.00,'5 years',NULL),(2,2,2,2000.00,'3 years',NULL),(3,3,2,2500.00,'4 years',NULL),(4,3,3,1500.00,'2 years',NULL);
 /*!40000 ALTER TABLE `user_services` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -299,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-01-23 13:20:59
+-- Dump completed on 2026-01-23 19:52:32
