@@ -1,8 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS `p14_worksphere` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `p14_worksphere`;
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
 -- Host: localhost    Database: p14_worksphere
 -- ------------------------------------------------------
--- Server version	8.0.43
+-- Server version	8.2.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -15,9 +17,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
 --
 -- Table structure for table `bill`
 --
+
 
 DROP TABLE IF EXISTS `bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -230,13 +234,17 @@ CREATE TABLE `user` (
   `email` varchar(100) DEFAULT NULL,
   `pass` varchar(100) NOT NULL,
   `phone` varchar(15) NOT NULL,
-  `status` tinyint(1) DEFAULT NULL,
+  `status` int DEFAULT NULL,
   `addr` varchar(200) NOT NULL,
-  `state` varchar(100) NOT NULL,
-  `city` varchar(100) NOT NULL,
+  `state` int NOT NULL,
+  `city` int NOT NULL,
   PRIMARY KEY (`uid`),
-  KEY `user_ibfk_1` (`rid`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`rid`) REFERENCES `role` (`rid`)
+  KEY `rid` (`rid`),
+  KEY `state_idx` (`state`),
+  KEY `city_idx` (`city`),
+  CONSTRAINT `city` FOREIGN KEY (`city`) REFERENCES `city` (`city_id`),
+  CONSTRAINT `rid` FOREIGN KEY (`rid`) REFERENCES `role` (`rid`),
+  CONSTRAINT `state` FOREIGN KEY (`state`) REFERENCES `state` (`state_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -246,7 +254,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,'Amit','Sharma','amit@example.com','pass123','9876543210',1,'123 Admin Lane','Maharashtra','Mumbai'),(2,2,'Rahul','Verma','rahul@example.com','rahul123','9876543211',1,'45 Freelance St','Maharashtra','Pune'),(3,2,'Priya','Singh','priya@example.com','priya123','9876543212',1,'78 Design Rd','Karnataka','Bangalore'),(4,3,'Suresh','Patel','suresh@example.com','suresh123','9876543213',1,'12 Client Ave','Gujarat','Ahmedabad'),(5,3,'Anjali','Nair','anjali@example.com','anjali123','9876543214',1,'34 Client Blvd','Karnataka','Bangalore');
+INSERT INTO `user` VALUES (1,1,'Amit','Sharma','amit@example.com','pass123','9876543210',1,'123 Admin Lane',1,1),(2,2,'Rahul','Verma','rahul@example.com','rahul123','9876543211',1,'45 Freelance St',1,2),(3,2,'Priya','Singh','priya@example.com','priya123','9876543212',1,'78 Design Rd',2,3),(4,3,'Suresh','Patel','suresh@example.com','suresh123','9876543213',1,'12 Client Ave',3,4),(5,3,'Anjali','Nair','anjali@example.com','anjali123','9876543214',1,'34 Client Blvd',4,5);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,4 +299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-01-21 13:47:53
+-- Dump completed on 2026-01-23 13:20:59
