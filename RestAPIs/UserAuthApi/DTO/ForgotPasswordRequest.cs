@@ -1,8 +1,8 @@
 ﻿namespace UserAuthApi.DTOs
 {
-    public class LoginRequest
+    public class ForgotPasswordRequest
     {
         public required string Phone { get; set; }
-        public required string Pass { get; set; }
+        public required string NewPass { get; set; }
     }
 }
