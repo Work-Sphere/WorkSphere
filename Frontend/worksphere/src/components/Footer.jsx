@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-<<<<<<< HEAD
+
    <><div className="container">
       <footer className="py-5">
         <div className="row">
@@ -52,27 +52,11 @@ function Footer() {
           </div>
         </div>
 
-        <div className="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-          <p>© 2026 Company, Inc. All rights reserved.</p>
-          <ul className="list-unstyled d-flex">
-            <li className="ms-3">
-                <a className="link-body-emphasis" href="#" aria-label="Instagram">
-                    <svg className="bi" width="24" height="24"><use xlinkHref="#instagram"></use></svg>
-                </a>
-            </li>
-            <li className="ms-3">
-                <a className="link-body-emphasis" href="#" aria-label="Facebook">
-                    <svg className="bi" width="24" height="24"><use xlinkHref="#facebook"></use></svg>
-                </a>
-            </li>
-          </ul>
-        </div>
+    
       </footer>
     </div>
     </>
-=======
-    <div>Footer</div>
->>>>>>> 5d1693d49d8fd454287765d51f1b4eae842c8de4
+
   )
 }
 

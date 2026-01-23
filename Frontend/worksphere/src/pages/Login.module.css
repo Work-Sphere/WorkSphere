@@ -1,0 +1,45 @@
+/* Login.module.css */
+
+.loginContainer {
+  min-height: 80vh;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginCard {
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.loginCard:hover {
+  transform: translateY(-5px);
+}
+
+.forgotPassword {
+  color: #6c757d;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.forgotPassword:hover {
+  color: #0d6efd;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.submitBtn {
+  transition: all 0.3s ease;
+}
+
+.submitBtn:hover {
+  filter: brightness(90%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
