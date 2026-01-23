@@ -37,11 +37,9 @@ namespace UserAuthApi.Controllers
                 Phone = request.Phone,
                 Addr = request.Addr,
 
-                // ✅ updated (int FK)
                 State = request.State,
                 City = request.City,
 
-                // ✅ updated (int now)
                 Status = 1
             };
 
@@ -52,7 +50,6 @@ namespace UserAuthApi.Controllers
         }
 
 
-        // ✅ LOGIN
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
