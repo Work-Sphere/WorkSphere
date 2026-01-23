@@ -3,7 +3,9 @@ using UserAuthApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Add DbContext
+// ===============================
+// Database (MySQL)
+// ===============================
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseMySql(
@@ -12,9 +14,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     );
 });
 
-builder.Services.AddControllers();
+// ===============================
+// Controllers
+// ===============================
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // 🔥 IMPORTANT for null values from React
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    });
 
-// ✅ Enable CORS for React
+// ===============================
+// CORS (React)
+// ===============================
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReact", policy =>
@@ -25,13 +37,17 @@ builder.Services.AddCors(options =>
     });
 });
 
-// ✅ Swagger
+// ===============================
+// Swagger
+// ===============================
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseCors("AllowReact");
+// ===============================
+// MIDDLEWARE ORDER (VERY IMPORTANT)
+// ===============================
 
 if (app.Environment.IsDevelopment())
 {
@@ -40,6 +56,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// ✅ CORS MUST be AFTER HTTPS and BEFORE MapControllers
+app.UseCors("AllowReact");
+
 app.MapControllers();
 
 app.Run();

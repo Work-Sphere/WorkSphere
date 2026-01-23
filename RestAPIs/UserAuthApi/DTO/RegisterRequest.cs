@@ -5,7 +5,7 @@
         public int Rid { get; set; }
         public string Fname { get; set; }
         public string? Lname { get; set; }
-        public string Email { get; set; }
+        public string? Email { get; set; }
         public string Pass { get; set; }
         public string Phone { get; set; }
         public string Addr { get; set; }

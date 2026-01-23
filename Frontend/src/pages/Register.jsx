@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import './Register.css';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './SharedAuth.css';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -15,6 +17,7 @@ function Register() {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   // Indian states and cities
   const indianStates = [
@@ -103,13 +106,32 @@ function Register() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  // 🔥 NEW API INTEGRATION - Replace old handleSubmit
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      const fullName = formData.firstName + (formData.lastName ? ` ${formData.lastName}` : '');
-      console.log('Form submitted:', { ...formData, fullName });
-      alert('Registration successful!');
+    if (!validateForm()) return;
+
+    setLoading(true);
+
+    try {
+      // Map React form → Backend DTO format
+     const registerData = {
+  Rid: formData.role === 'freelancer' ? 1 : 2,
+  Fname: formData.firstName,
+  Lname: formData.lastName ? formData.lastName : null,
+  Email: formData.email ? formData.email : null,
+  Pass: formData.password,
+  Phone: formData.phone,
+  Addr: formData.address,
+  State: formData.state,
+  City: formData.city
+};
+
+      // Call your .NET API (CHANGE PORT if different)
+      const response = await axios.post('https://localhost:7239/api/auth/register', registerData);
+      
+      alert(response.data);  // Shows: "User registered successfully ✅"
       
       // Reset form
       setFormData({
@@ -124,17 +146,25 @@ function Register() {
         city: ''
       });
       setErrors({});
+
+    } catch (error) {
+      // Handle API errors
+      const errorMsg = error.response?.data || 'Registration failed! Please try again.';
+      alert(errorMsg);
+      console.error('Registration error:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="register-container">
+    <div className="auth-container">
       <h2>Registration Form</h2>
-      <form onSubmit={handleSubmit} className="register-form">
+      <form onSubmit={handleSubmit} className="auth-form">
         {/* Role Field - MANDATORY */}
         <div className="form-group">
           <label htmlFor="role">Role <span style={{color: '#e74c3c'}}>*</span>:</label>
-          <select id="role" name="role" value={formData.role} onChange={handleChange} required>
+          <select id="role" name="role" value={formData.role} onChange={handleChange} required disabled={loading}>
             <option value="">Select Role</option>
             <option value="freelancer">Freelancer</option>
             <option value="client">Client</option>
@@ -153,6 +183,7 @@ function Register() {
               value={formData.firstName}
               onChange={handleChange}
               required
+              disabled={loading}
             />
             {errors.firstName && <span className="error">{errors.firstName}</span>}
           </div>
@@ -164,6 +195,7 @@ function Register() {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
+              disabled={loading}
             />
           </div>
         </div>
@@ -177,6 +209,7 @@ function Register() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            disabled={loading}
           />
           {errors.email && <span className="error">{errors.email}</span>}
         </div>
@@ -191,6 +224,7 @@ function Register() {
             value={formData.password}
             onChange={handleChange}
             required
+            disabled={loading}
           />
           {errors.password && <span className="error">{errors.password}</span>}
         </div>
@@ -206,6 +240,7 @@ function Register() {
             onChange={handleChange}
             maxLength="10"
             required
+            disabled={loading}
           />
           {errors.phone && <span className="error">{errors.phone}</span>}
         </div>
@@ -219,6 +254,8 @@ function Register() {
             value={formData.address}
             onChange={handleChange}
             required
+            disabled={loading}
+            rows="3"
           />
           {errors.address && <span className="error">{errors.address}</span>}
         </div>
@@ -235,6 +272,7 @@ function Register() {
             list="states"
             placeholder="Type to search state..."
             required
+            disabled={loading}
           />
           <datalist id="states">
             {indianStates.map((state, index) => (
@@ -256,6 +294,7 @@ function Register() {
             list="cities"
             placeholder="Type to search city..."
             required
+            disabled={loading}
           />
           <datalist id="cities">
             {indianCities.map((city, index) => (
@@ -265,15 +304,21 @@ function Register() {
           {errors.city && <span className="error">{errors.city}</span>}
         </div>
         
-        <button type="submit" className="submit-btn">Register</button>
+        <button 
+          type="submit" 
+          className="submit-btn"
+          disabled={loading}
+        >
+          {loading ? 'Registering...' : 'Register'}
+        </button>
       </form>
       
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <p>
           Already registered?{' '}
-          <a href="/login" style={{ color: '#3498db', textDecoration: 'none', fontWeight: '600' }}>
+          <Link to="/login" style={{ color: '#3498db', textDecoration: 'none', fontWeight: '600' }}>
             Login here
-          </a>
+          </Link>
         </p>
         <small style={{color: '#7f8c8d', marginTop: '10px', display: 'block'}}>
           * Required fields
