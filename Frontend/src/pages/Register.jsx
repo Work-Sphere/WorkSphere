@@ -7,44 +7,19 @@ function Register() {
   const [formData, setFormData] = useState({
     role: 'freelancer',
     firstName: '',
-    lastName: '',     // Optional
-    email: '',        // Optional  
+    lastName: '',
+    email: '',
     password: '',
     phone: '',
-    address: '',
-    state: '',
-    city: ''
+    address: ''
   });
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // Indian states and cities
-  const indianStates = [
-    'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
-    'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand',
-    'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur',
-    'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab',
-    'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura',
-    'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Delhi', 'Andaman and Nicobar Islands',
-    'Chandigarh', 'Dadra and Nagar Haveli and Daman and Diu', 'Lakshadweep', 'Puducherry'
-  ];
-
-  const indianCities = [
-    'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Ahmedabad', 'Chennai', 
-    'Kolkata', 'Surat', 'Pune', 'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur',
-    'Indore', 'Thane', 'Bhopal', 'Visakhapatnam', 'Pimpri-Chinchwad', 'Patna',
-    'Vadodara', 'Ghaziabad', 'Ludhiana', 'Nashik', 'Faridabad', 'Meerut'
-  ];
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-
-    // Real-time validation
+    setFormData({ ...formData, [name]: value });
     validateField(name, value);
   };
 
@@ -65,8 +40,6 @@ function Register() {
       case 'password':
         if (value.length < 8) {
           error = 'Password must be minimum 8 characters';
-        } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(value)) {
-          error = 'Password must contain uppercase, lowercase, number & special character';
         }
         break;
       case 'firstName':
@@ -78,62 +51,51 @@ function Register() {
         break;
     }
 
-    setErrors(prev => ({
-      ...prev,
-      [name]: error
-    }));
+    setErrors(prev => ({ ...prev, [name]: error }));
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
-    // MANDATORY FIELDS ONLY (except lastName and email)
-    const requiredFields = ['role', 'firstName', 'password', 'phone', 'address', 'state', 'city'];
-    
+    const requiredFields = ['role', 'firstName', 'password', 'phone', 'address'];
+
     requiredFields.forEach(field => {
       if (!formData[field].trim()) {
-        newErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+        newErrors[field] = `${field} is required`;
       }
     });
-
-    // Custom validations for filled fields only
-    if (formData.phone) validateField('phone', formData.phone);
-    if (formData.email) validateField('email', formData.email);
-    if (formData.password) validateField('password', formData.password);
-    if (formData.firstName) validateField('firstName', formData.firstName);
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // 🔥 NEW API INTEGRATION - Replace old handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!validateForm()) return;
 
     setLoading(true);
 
     try {
-      // Map React form → Backend DTO format
-     const registerData = {
-  Rid: formData.role === 'freelancer' ? 1 : 2,
-  Fname: formData.firstName,
-  Lname: formData.lastName ? formData.lastName : null,
-  Email: formData.email ? formData.email : null,
-  Pass: formData.password,
-  Phone: formData.phone,
-  Addr: formData.address,
-  State: formData.state,
-  City: formData.city
-};
+      const registerData = {
+        Rid: formData.role === 'freelancer' ? 1 : 2,
+        Fname: formData.firstName,
+        Lname: formData.lastName || null,
+        Email: formData.email || null,
+        Pass: formData.password,
+        Phone: formData.phone,
+        Addr: formData.address,
 
-      // Call your .NET API (CHANGE PORT if different)
-      const response = await axios.post('https://localhost:7239/api/auth/register', registerData);
-      
-      alert(response.data);  // Shows: "User registered successfully ✅"
-      
-      // Reset form
+        // ✅ TEMP DEFAULTS (until DB APIs added)
+        State: 1,
+        City: 1
+      };
+
+      const response = await axios.post(
+        'https://localhost:7239/api/auth/register',
+        registerData
+      );
+
+      alert(response.data);
+
       setFormData({
         role: 'freelancer',
         firstName: '',
@@ -141,17 +103,12 @@ function Register() {
         email: '',
         password: '',
         phone: '',
-        address: '',
-        state: '',
-        city: ''
+        address: ''
       });
       setErrors({});
-
     } catch (error) {
-      // Handle API errors
-      const errorMsg = error.response?.data || 'Registration failed! Please try again.';
-      alert(errorMsg);
-      console.error('Registration error:', error);
+      alert(error.response?.data || 'Registration failed!');
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -160,172 +117,34 @@ function Register() {
   return (
     <div className="auth-container">
       <h2>Registration Form</h2>
+
       <form onSubmit={handleSubmit} className="auth-form">
-        {/* Role Field - MANDATORY */}
         <div className="form-group">
-          <label htmlFor="role">Role <span style={{color: '#e74c3c'}}>*</span>:</label>
-          <select id="role" name="role" value={formData.role} onChange={handleChange} required disabled={loading}>
-            <option value="">Select Role</option>
+          <label>Role *</label>
+          <select name="role" value={formData.role} onChange={handleChange}>
             <option value="freelancer">Freelancer</option>
             <option value="client">Client</option>
           </select>
-          {errors.role && <span className="error">{errors.role}</span>}
-        </div>
-        
-        {/* First Name & Last Name */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="firstName">First Name <span style={{color: '#e74c3c'}}>*</span>:</label>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-              disabled={loading}
-            />
-            {errors.firstName && <span className="error">{errors.firstName}</span>}
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name (Optional):</label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
         </div>
 
-        {/* Email - OPTIONAL */}
-        <div className="form-group">
-          <label htmlFor="email">Email (Optional):</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            disabled={loading}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
-        
-        {/* Password - MANDATORY */}
-        <div className="form-group">
-          <label htmlFor="password">Password <span style={{color: '#e74c3c'}}>*</span>:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            disabled={loading}
-          />
-          {errors.password && <span className="error">{errors.password}</span>}
-        </div>
-        
-        {/* Phone - MANDATORY */}
-        <div className="form-group">
-          <label htmlFor="phone">Phone <span style={{color: '#e74c3c'}}>*</span>:</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            maxLength="10"
-            required
-            disabled={loading}
-          />
-          {errors.phone && <span className="error">{errors.phone}</span>}
-        </div>
-        
-        {/* Address - MANDATORY */}
-        <div className="form-group">
-          <label htmlFor="address">Address <span style={{color: '#e74c3c'}}>*</span>:</label>
-          <textarea
-            id="address"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-            disabled={loading}
-            rows="3"
-          />
-          {errors.address && <span className="error">{errors.address}</span>}
-        </div>
+        <input name="firstName" placeholder="First Name" onChange={handleChange} />
+        <input name="lastName" placeholder="Last Name (Optional)" onChange={handleChange} />
+        <input name="email" placeholder="Email (Optional)" onChange={handleChange} />
+        <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+        <input name="phone" placeholder="Phone" onChange={handleChange} />
+        <textarea name="address" placeholder="Address" onChange={handleChange} />
 
-        {/* State - MANDATORY */}
-        <div className="form-group">
-          <label htmlFor="state">State <span style={{color: '#e74c3c'}}>*</span>:</label>
-          <input
-            type="text"
-            id="state"
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            list="states"
-            placeholder="Type to search state..."
-            required
-            disabled={loading}
-          />
-          <datalist id="states">
-            {indianStates.map((state, index) => (
-              <option key={index} value={state} />
-            ))}
-          </datalist>
-          {errors.state && <span className="error">{errors.state}</span>}
-        </div>
-
-        {/* City - MANDATORY */}
-        <div className="form-group">
-          <label htmlFor="city">City <span style={{color: '#e74c3c'}}>*</span>:</label>
-          <input
-            type="text"
-            id="city"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            list="cities"
-            placeholder="Type to search city..."
-            required
-            disabled={loading}
-          />
-          <datalist id="cities">
-            {indianCities.map((city, index) => (
-              <option key={index} value={city} />
-            ))}
-          </datalist>
-          {errors.city && <span className="error">{errors.city}</span>}
-        </div>
-        
-        <button 
-          type="submit" 
-          className="submit-btn"
-          disabled={loading}
-        >
+        <button disabled={loading}>
           {loading ? 'Registering...' : 'Register'}
         </button>
       </form>
-      
-      <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <p>
-          Already registered?{' '}
-          <Link to="/login" style={{ color: '#3498db', textDecoration: 'none', fontWeight: '600' }}>
-            Login here
-          </Link>
-        </p>
-        <small style={{color: '#7f8c8d', marginTop: '10px', display: 'block'}}>
-          * Required fields
-        </small>
-      </div>
+
+      <p style={{ textAlign: 'center' }}>
+        Already registered? <Link to="/login">Login here</Link>
+      </p>
     </div>
   );
 }
 
 export default Register;
+  

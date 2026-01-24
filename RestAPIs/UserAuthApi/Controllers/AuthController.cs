@@ -46,7 +46,8 @@ namespace UserAuthApi.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok("User registered successfully ✅");
+
+            return Ok("User registered successfully");
         }
 
 
@@ -54,10 +55,11 @@ namespace UserAuthApi.Controllers
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == request.Email);
+
+                .FirstOrDefaultAsync(u => u.Phone == request.Phone);
 
             if (user == null)
-                return BadRequest("Invalid Email");
+                return BadRequest("Invalid Phone Number");
 
             bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(request.Pass, user.Pass);
 
@@ -66,7 +68,8 @@ namespace UserAuthApi.Controllers
 
             var response = new LoginResponse
             {
-                Message = "Login Successful ✅",
+
+                Message = "Login Successful",
                 Uid = user.Uid,
                 Rid = user.Rid,
                 Fname = user.Fname,
@@ -76,5 +79,24 @@ namespace UserAuthApi.Controllers
 
             return Ok(response);
         }
+
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Phone == request.Phone);
+
+            if (user == null)
+                return BadRequest("Phone number not registered");
+
+            user.Pass = BCrypt.Net.BCrypt.HashPassword(request.NewPass);
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Password updated successfully");
+        }
+
+
+
     }
 }
