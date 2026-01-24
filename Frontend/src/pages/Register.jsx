@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -425,3 +426,14 @@ function Register() {
 
 export default Register;
   
+=======
+import React from 'react'
+
+function Register() {
+  return (
+    <div>Register</div>
+  )
+}
+
+export default Register
+>>>>>>> parent of f44ebf5 (Merge branch 'Tejas' of https://github.com/Work-Sphere/WorkSphere)

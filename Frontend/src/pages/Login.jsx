@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 <<<<<<< HEAD
@@ -192,3 +193,14 @@ function Login() {
 }
 
 export default Login;
+=======
+import React from 'react'
+
+function Login() {
+  return (
+    <div>Login</div>
+  )
+}
+
+export default Login
+>>>>>>> parent of f44ebf5 (Merge branch 'Tejas' of https://github.com/Work-Sphere/WorkSphere)

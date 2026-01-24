@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
@@ -48,6 +49,16 @@ function App() {
       </div>
 >>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
     </>
+=======
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+>>>>>>> parent of f44ebf5 (Merge branch 'Tejas' of https://github.com/Work-Sphere/WorkSphere)
   );
 }
 
