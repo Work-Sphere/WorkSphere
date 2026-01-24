@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 body, html {
   margin: 0;
   padding: 20px; /* ✅ Added padding */
@@ -13,6 +14,9 @@ body, html {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+=======
+/* ✅ FIXED: Removed body/html - let App.jsx handle layout */
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
 .register-container {
   width: 100%;
   max-width: 650px;
@@ -21,7 +25,11 @@ body, html {
   background: linear-gradient(135deg, #ecf0f1 0%, #d5dbdb 100%);
   border-radius: 16px;
   box-shadow: 0 15px 40px rgba(52, 152, 219, 0.25);
+<<<<<<< HEAD
   /* ✅ Removed auto margin - now properly centered */
+=======
+  margin: 20px auto; /* ✅ ADDED proper margin */
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
 }
 
 .register-container h2 {
@@ -60,10 +68,17 @@ body, html {
   letter-spacing: 0.5px;
 }
 
+<<<<<<< HEAD
 /* Unified input/select/textarea styling */
 .form-group input,
 .form-group textarea,
 .form-group select {
+=======
+/* Unified styling for ALL form fields */
+.register-container .form-group input,
+.register-container .form-group textarea,
+.register-container .form-group select {
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
   width: 100%;
   padding: 16px 18px;
   border: 2px solid #bdc3c7;
@@ -76,8 +91,22 @@ body, html {
   line-height: 1.5; /* ✅ Added */
 }
 
+<<<<<<< HEAD
 /* Role dropdown arrow */
 .form-group select {
+=======
+/* Disabled state styling */
+.register-container .form-group input:disabled,
+.register-container .form-group select:disabled,
+.register-container .form-group textarea:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Custom dropdown arrow */
+.register-container .form-group select {
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
   padding-right: 50px;
   appearance: none;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237f8c8d' stroke-width='2'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -87,6 +116,7 @@ body, html {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 /* Focus states */
 .form-group input:focus,
 .form-group textarea:focus,
@@ -95,25 +125,51 @@ body, html {
   border-color: #3498db;
   box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15);
   transform: translateY(-1px);
+=======
+.register-container .form-group select:disabled {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bdc3c7' stroke-width='2'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
 }
 
-.form-group input:hover,
-.form-group textarea:hover,
-.form-group select:hover {
+.register-container .form-group input::placeholder {
+  color: #7f8c8d;
+}
+
+/* Focus states */
+.register-container .form-group input:focus,
+.register-container .form-group textarea:focus,
+.register-container .form-group select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15);
+  transform: translateY(-2px);
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
+}
+
+.register-container .form-group input:hover,
+.register-container .form-group textarea:hover,
+.register-container .form-group select:hover {
   border-color: #95a5a6;
 }
 
+<<<<<<< HEAD
 .form-group input::placeholder {
   color: #7f8c8d;
 }
 
 .form-group textarea {
+=======
+.register-container .form-group textarea {
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
   resize: vertical;
   min-height: 100px; /* ✅ Reduced slightly */
   cursor: text;
 }
 
+<<<<<<< HEAD
 /* Error messages */
+=======
+/* Warnings only - no red borders */
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
 .error {
   display: block;
   color: #e74c3c;
@@ -122,6 +178,10 @@ body, html {
   font-weight: 500;
 }
 
+<<<<<<< HEAD
+=======
+/* Form row for First/Last Name */
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
 .form-row {
   display: flex;
   gap: 20px;
@@ -133,6 +193,29 @@ body, html {
   min-width: 0;
 }
 
+<<<<<<< HEAD
+=======
+/* ✅ API Error Banner */
+.api-error-banner {
+  padding: 12px 16px;
+  background: #fef5e7;
+  border: 1px solid #f4a261;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #d68910;
+  font-weight: 500;
+}
+
+/* ✅ Loading text */
+.loading-text {
+  color: #f39c12;
+  font-style: italic;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
 /* Submit button */
 .submit-btn {
   padding: 18px 40px;
@@ -157,10 +240,24 @@ body, html {
 }
 
 .submit-btn:disabled {
+<<<<<<< HEAD
   opacity: 0.7;
   cursor: not-allowed;
 }
 
+=======
+  background: #bdc3c7 !important;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+.submit-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Links */
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
 .register-container a {
   color: #3498db;
   text-decoration: none;
@@ -171,10 +268,41 @@ body, html {
   text-decoration: underline;
 }
 
+<<<<<<< HEAD
 /* ✅ PERFECT RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   body, html {
     padding: 10px;
+=======
+/* Debug buttons - remove in production */
+.register-container .debug-buttons {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.register-container .debug-buttons button {
+  background: #95a5a6;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  margin: 0 2px;
+  border-radius: 3px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.register-container .debug-buttons button:hover {
+  background: #7f8c8d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .register-container {
+    width: 95%;
+    max-width: 500px;
+    padding: 40px 30px;
+    margin: 20px auto;
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
   }
   
   .register-container {
@@ -189,6 +317,7 @@ body, html {
     margin-bottom: 25px;
   }
   
+<<<<<<< HEAD
   .form-row {
     flex-direction: column;
     gap: 22px;
@@ -226,5 +355,10 @@ body, html {
   .register-container {
     padding: 25px 20px;
     margin: 0 auto;
+=======
+  .api-error-banner {
+    font-size: 14px;
+    padding: 10px;
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
   }
 }

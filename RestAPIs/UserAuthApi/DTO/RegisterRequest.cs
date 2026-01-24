@@ -7,7 +7,7 @@
 
         public string? Lname { get; set; }
 
-        public required string Email { get; set; }
+        public string? Email { get; set; }
 
         public required string Pass { get; set; }
 

@@ -2,7 +2,7 @@
 {
     public class ForgotPasswordRequest
     {
-        public required string Phone { get; set; }
-        public required string NewPass { get; set; }
+        public string Phone { get; set; }
+        public string NewPassword { get; set; }
     }
 }

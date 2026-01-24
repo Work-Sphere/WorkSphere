@@ -1,29 +1,89 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import './SharedAuth.css';
+=======
+import './Register.css';
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
 
 function Login() {
   const [number, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
- 
- const handleLogin = (e) => {
+  const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const API_BASE_URL = '/api';
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    
-    // Final check before submission
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[@]).{8,}$/;
-    
-    if (!passwordRegex.test(password)) {
-      alert("Password must contain: 1 Capital letter, 1 number, 1 alphabet, and '@'");
-      return;
+    setApiError('');
+
+    const newErrors = {};
+
+    if (!number.trim()) {
+      newErrors.number = 'Mobile number is required';
+    } else if (!/^\d{10}$/.test(number)) {
+      newErrors.number = 'Mobile number must be exactly 10 digits';
     }
 
-    console.log("Validation Successful:", number, password);
-  };
-  
+    if (!password) {
+      newErrors.password = 'Password is required';
+    }
 
-  
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length !== 0) return;
+
+    try {
+      setIsSubmitting(true);
+
+      const payload = {
+        phone: number,
+        pass: password
+      };
+
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const text = await response.text();
+
+      let result = {};
+      try {
+        result = text ? JSON.parse(text) : {};
+      } catch {
+        result = { message: text };
+      }
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Login failed');
+      }
+
+      // ✅ SUCCESS
+      console.log('Login success:', result);
+
+      // OPTIONAL (if token is returned)
+      // localStorage.setItem('token', result.token);
+
+      alert('Login successful');
+
+      setMobileNumber('');
+      setPassword('');
+      setErrors({});
+
+    } catch (err) {
+      setApiError(err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
+<<<<<<< HEAD
     <div className="auth-container">
       <h2>Login</h2>
       <form className="auth-form" onSubmit={handleLogin}>
@@ -76,6 +136,57 @@ function Login() {
           </Link>
         </div>
       </form>
+=======
+    <div className="register-container">
+      <h2>Login</h2>
+
+      {apiError && (
+        <div className="api-error-banner">
+          ⚠️ {apiError}
+        </div>
+      )}
+
+      <form onSubmit={handleLogin} className="register-form">
+        <div className="form-group">
+          <label>Mobile Number *</label>
+          <input
+            type="text"
+            value={number}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val === '' || /^\d+$/.test(val)) {
+                setMobileNumber(val);
+              }
+            }}
+            maxLength="10"
+          />
+          {errors.number && <span className="error">{errors.number}</span>}
+        </div>
+
+        <div className="form-group">
+          <label>Password *</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {errors.password && <span className="error">{errors.password}</span>}
+        </div>
+
+        <button type="submit" className="submit-btn" disabled={isSubmitting}>
+          {isSubmitting ? 'Signing in...' : 'Sign In'}
+        </button>
+      </form>
+
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <p>
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </p>
+        <p>
+          Don&apos;t have an account? <Link to="/register">Register here</Link>
+        </p>
+      </div>
+>>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
     </div>
   );
 }

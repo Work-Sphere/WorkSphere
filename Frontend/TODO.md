@@ -1,6 +1,8 @@
-# TODO for Registration Page
+# TODO: Connect Auth Pages and Apply Consistent Styling
 
-- [x] Update Register.jsx to include form with fields: name, email, password, phone, address, State, city
-- [x] Create Register.css for proper styling of the form
-- [x] Import CSS in Register.jsx
-- [x] Test the registration page
+## Steps to Complete:
+- [ ] Update AppRoutes.jsx to add routes for /login and /forgot-password
+- [ ] Modify Login.jsx to use Register.css and match Register's structure
+- [ ] Modify ForgotPassword.jsx to use Register.css and match Register's structure
+- [ ] Verify navigation links between pages
+- [ ] Test the connections and styling consistency
