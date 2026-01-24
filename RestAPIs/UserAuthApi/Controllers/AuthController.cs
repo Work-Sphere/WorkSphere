@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UserAuthApi.Data;
 using UserAuthApi.DTOs;
 using UserAuthApi.Models;
-using BCrypt.Net;
 
 namespace UserAuthApi.Controllers
 {
-    [Route("api/auth")]
+    [EnableCors("AllowReactApp")]   // ✅ FIX CORS
     [ApiController]
+    [Route("api/auth")]
     public class AuthController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -18,6 +20,7 @@ namespace UserAuthApi.Controllers
             _context = context;
         }
 
+        // ---------------- REGISTER ----------------
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
@@ -36,39 +39,35 @@ namespace UserAuthApi.Controllers
                 Pass = BCrypt.Net.BCrypt.HashPassword(request.Pass),
                 Phone = request.Phone,
                 Addr = request.Addr,
-
                 State = request.State,
                 City = request.City,
-
                 Status = 1
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-
-            return Ok("User registered successfully");
+            return Ok(new { message = "User registered successfully" });
         }
 
-
+        // ---------------- LOGIN ----------------
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var user = await _context.Users
-
                 .FirstOrDefaultAsync(u => u.Phone == request.Phone);
 
             if (user == null)
                 return BadRequest("Invalid Phone Number");
 
-            bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(request.Pass, user.Pass);
+            bool isPasswordCorrect =
+                BCrypt.Net.BCrypt.Verify(request.Pass, user.Pass);
 
             if (!isPasswordCorrect)
                 return BadRequest("Invalid Password");
 
             var response = new LoginResponse
             {
-
                 Message = "Login Successful",
                 Uid = user.Uid,
                 Rid = user.Rid,
@@ -80,23 +79,24 @@ namespace UserAuthApi.Controllers
             return Ok(response);
         }
 
-
+        // ---------------- FORGOT / RESET PASSWORD ----------------
         [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
+        [AllowAnonymous] // ✅ IMPORTANT: allow unauthenticated access
+        public async Task<IActionResult> ForgotPassword(
+            [FromBody] ForgotPasswordRequest request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Phone == request.Phone);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Phone == request.Phone);
 
             if (user == null)
                 return BadRequest("Phone number not registered");
 
-            user.Pass = BCrypt.Net.BCrypt.HashPassword(request.NewPass);
+            // ✅ HASH NEW PASSWORD
+            user.Pass = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
 
             await _context.SaveChangesAsync();
 
-            return Ok("Password updated successfully");
+            return Ok(new { message = "Password updated successfully" });
         }
-
-
-
     }
 }
