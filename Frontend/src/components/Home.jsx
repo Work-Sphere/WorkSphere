@@ -1,59 +1,85 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import Navbar from "./Navbar"; // ✅ IMPORT NAVBAR
+import "./Home.css";
 
 function Home() {
+  const services = [
+    { title: "Web Developer", desc: "Modern websites & apps", icon: "💻" },
+    { title: "Electrician", desc: "Wiring & electrical repairs", icon: "⚡" },
+    { title: "Plumber", desc: "Pipes & leak fixing", icon: "🚰" },
+    { title: "Graphic Designer", desc: "Logos & UI designs", icon: "🎨" },
+    { title: "AC Technician", desc: "Repair & maintenance", icon: "❄️" },
+    { title: "Digital Marketer", desc: "SEO & social media", icon: "📈" },
+    { title: "Carpenter", desc: "Furniture & woodwork", icon: "🪚" },
+  ];
+
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      color: 'white',
-      textAlign: 'center',
-      padding: '20px'
-    }}>
-      <h1 style={{ fontSize: '3rem', marginBottom: '20px' }}>Welcome to WorkSphere</h1>
-      <p style={{ fontSize: '1.2rem', marginBottom: '40px' }}>
-        Connect with freelancers and clients in our platform
-      </p>
-      <div style={{ display: 'flex', gap: '20px' }}>
-        <Link
-          to="/login"
-          style={{
-            padding: '15px 30px',
-            background: 'linear-gradient(135deg, #3498db, #2980b9)',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '10px',
-            fontSize: '1.1rem',
-            fontWeight: '600',
-            transition: 'all 0.3s ease'
-          }}
-          onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
-          onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
-        >
-          Login
-        </Link>
-        <Link
-          to="/register"
-          style={{
-            padding: '15px 30px',
-            background: 'linear-gradient(135deg, #27ae60, #2ecc71)',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '10px',
-            fontSize: '1.1rem',
-            fontWeight: '600',
-            transition: 'all 0.3s ease'
-          }}
-          onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
-          onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
-        >
-          Register
-        </Link>
-      </div>
+    <div className="home-container">
+      {/* ✅ NAVBAR COMPONENT */}
+      <Navbar />
+
+      {/* MAIN */}
+      <main className="home-main">
+        {/* HERO */}
+        <section className="hero-section">
+          <h1>
+            Find <span>trusted professionals</span>
+            <br />
+            for every job you need,
+            <br />
+            done <em>right</em>.
+          </h1>
+
+          <p className="hero-subtext">
+            Tired of searching multiple places for different services?
+            WorkSphere brings verified professionals together in one platform —
+            from tech experts to home service providers, all quality-checked and
+            ready to work.
+          </p>
+        </section>
+
+        {/* SERVICES SCROLL */}
+        <section className="services-section">
+          <h3>Popular Services</h3>
+
+          <div className="services-scroll">
+            {services.map((service, index) => (
+              <div className="service-card" key={index}>
+                <div className="service-icon">{service.icon}</div>
+                <h4>{service.title}</h4>
+                <p>{service.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* STATS */}
+        <section className="stats-section">
+          <div className="stat">
+            <h2>300k+</h2>
+            <p>Professionals</p>
+          </div>
+          <div className="stat">
+            <h2>50+</h2>
+            <p>Service Categories</p>
+          </div>
+          <div className="stat">
+            <h2>1M+</h2>
+            <p>Jobs Completed</p>
+          </div>
+        </section>
+      </main>
+
+      {/* FOOTER */}
+      <footer className="home-footer">
+        <p>© 2026 WorkSphere. All rights reserved.</p>
+        <div className="footer-links">
+          <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </div>
+      </footer>
     </div>
   );
 }

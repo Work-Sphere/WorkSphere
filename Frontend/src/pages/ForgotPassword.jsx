@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-import './SharedAuth.css';
-=======
-import './Register.css';
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
+import Navbar from '../components/Navbar';
+import './ForgotPassword.css';
 
 function ForgotPassword() {
   const [phone, setPhone] = useState('');
@@ -119,122 +116,140 @@ function ForgotPassword() {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="auth-container">
-      <h2>Forgot Password</h2>
-      <form className="auth-form" onSubmit={handleReset}>
-        <p style={{ textAlign: 'center', color: '#6c757d', marginBottom: '20px' }}>
-          Enter your email address and we'll send you a link to reset your password.
-        </p>
-
-        <div className="form-group">
-          <label htmlFor="floatingEmail">Email Address</label>
-          <input
-            type="email"
-            id="floatingEmail"
-            placeholder="name@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="forgot-password-page">
+      <Navbar />
+      
+      <div className="forgot-password-container">
+        {/* Left Side - Background Image with Overlay Content */}
+        <div className="forgot-background-side">
+          <div className="background-overlay">
+            <div className="overlay-content">
+              <h1 className="company-name">WorkSphere</h1>
+              <h2 className="creative-title">Reset Your Password</h2>
+              <p className="background-description">
+                Secure your WorkSphere account with a new password. 
+                We'll help you get back to accessing thousands of freelance 
+                opportunities and professional services.
+              </p>
+              <div className="feature-list">
+                <div className="feature-item">
+                  <span className="feature-icon">🔒</span>
+                  <span>Secure Password Reset</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">⚡</span>
+                  <span>Instant Account Recovery</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">👤</span>
+                  <span>Identity Verification</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">📱</span>
+                  <span>Mobile Number Based</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="mb-4" style={{ textAlign: 'center' }}>
-          <Link to="/login" style={{ color: '#3498db', textDecoration: 'none', fontWeight: '600' }}>
-            ← Back to Login
-          </Link>
+        {/* Right Side - Forgot Password Form */}
+        <div className="forgot-form-side">
+          <div className="forgot-form-container">
+            <div className="form-header">
+              <h2>Reset Password</h2>
+              <p className="form-subtitle">Enter your registered mobile number to reset password</p>
+            </div>
+
+            <div className="forgot-password-form-container">
+              {apiError && <div className="api-error-banner">⚠️ {apiError}</div>}
+
+              {successMessage && (
+                <div className="success-message-banner">
+                  ✅ {successMessage}
+                </div>
+              )}
+
+              <form onSubmit={handleReset} className="forgot-password-form">
+                <div className="form-group">
+                  <label htmlFor="phone">Mobile Number *</label>
+                  <div className="input-with-prefix">
+                    <input
+                      type="text"
+                      id="phone"
+                      value={phone}
+                      maxLength="10"
+                      placeholder="Enter registered mobile number"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (val === '' || /^\d+$/.test(val)) setPhone(val);
+                      }}
+                    />
+                  </div>
+                  {errors.phone && <span className="error">{errors.phone}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="newPassword">New Password *</label>
+                  <div className="password-input">
+                    <input
+                      type="password"
+                      id="newPassword"
+                      value={newPassword}
+                      placeholder="Enter new password"
+                      onChange={(e) => {
+                        setNewPassword(e.target.value);
+                        validateLive('newPassword', e.target.value);
+                      }}
+                    />
+                    <button type="button" className="show-password-btn" onClick={() => {}}>
+                      👁
+                    </button>
+                  </div>
+                  {errors.newPassword && (
+                    <span className="error">{errors.newPassword}</span>
+                  )}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="confirmPassword">Confirm Password *</label>
+                  <div className="password-input">
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      value={confirmPassword}
+                      placeholder="Confirm new password"
+                      onChange={(e) => {
+                        setConfirmPassword(e.target.value);
+                        validateLive('confirmPassword', e.target.value);
+                      }}
+                    />
+                    <button type="button" className="show-password-btn" onClick={() => {}}>
+                      👁
+                    </button>
+                  </div>
+                  {errors.confirmPassword && (
+                    <span className="error">{errors.confirmPassword}</span>
+                  )}
+                </div>
+
+                <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? 'Updating...' : 'Update Password'}
+                </button>
+              </form>
+            </div>
+
+            <div className="forgot-password-footer">
+              <p>
+                Remember your password? <Link to="/login">Login here</Link>
+              </p>
+              <p>
+                Don't have an account? <Link to="/register">Register here</Link>
+              </p>
+            </div>
+          </div>
         </div>
-
-        <div className="button-group">
-          <button className="submit-btn" type="submit">
-            Send Link
-          </button>
-          <Link to="/login" className="submit-btn" style={{ background: 'transparent', border: '2px solid #95a5a6', color: '#95a5a6', textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
-            Cancel
-          </Link>
-        </div>
-      </form>
-=======
-    <div className="register-container">
-      <h2>Reset Password</h2>
-
-      {apiError && <div className="api-error-banner">⚠️ {apiError}</div>}
-
-      {successMessage && (
-        <div
-          className="api-error-banner"
-          style={{
-            background: '#eafaf1',
-            color: '#1e8449',
-            borderColor: '#2ecc71'
-          }}
-        >
-          ✅ {successMessage}
-        </div>
-      )}
-
-      <form onSubmit={handleReset} className="register-form">
-        <div className="form-group">
-          <label>Mobile Number *</label>
-          <input
-            type="text"
-            value={phone}
-            maxLength="10"
-            placeholder="Enter registered mobile number"
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val === '' || /^\d+$/.test(val)) setPhone(val);
-            }}
-          />
-          {errors.phone && <span className="error">{errors.phone}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>New Password *</label>
-          <input
-            type="password"
-            value={newPassword}
-            placeholder="Enter new password"
-            onChange={(e) => {
-              setNewPassword(e.target.value);
-              validateLive('newPassword', e.target.value);
-            }}
-          />
-          {errors.newPassword && (
-            <span className="error">{errors.newPassword}</span>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label>Confirm Password *</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            placeholder="Confirm new password"
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-              validateLive('confirmPassword', e.target.value);
-            }}
-          />
-          {errors.confirmPassword && (
-            <span className="error">{errors.confirmPassword}</span>
-          )}
-        </div>
-
-        <button type="submit" className="submit-btn" disabled={isSubmitting}>
-          {isSubmitting ? 'Updating...' : 'Update Password'}
-        </button>
-      </form>
-
-      <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <p>
-          Remember your password? <Link to="/login">Login here</Link>
-        </p>
-        <p>
-          Don&apos;t have an account? <Link to="/register">Register here</Link>
-        </p>
       </div>
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
     </div>
   );
 }

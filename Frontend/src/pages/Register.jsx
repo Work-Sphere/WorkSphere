@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './SharedAuth.css';
-=======
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 import './Register.css';
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
 
 const ROLE_MAP = {
   freelancer: 2,
@@ -24,49 +17,6 @@ function Register() {
     password: '',
     confirmPassword: '',
     phone: '',
-<<<<<<< HEAD
-    address: ''
-  });
-
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    validateField(name, value);
-  };
-
-  const validateField = (name, value) => {
-    let error = '';
-
-    switch (name) {
-      case 'phone':
-        if (value && !/^\d{10}$/.test(value)) {
-          error = 'Phone must be exactly 10 digits';
-        }
-        break;
-      case 'email':
-        if (value && !/@gmail\.com$/.test(value)) {
-          error = 'Email must end with @gmail.com';
-        }
-        break;
-      case 'password':
-        if (value.length < 8) {
-          error = 'Password must be minimum 8 characters';
-        }
-        break;
-      case 'firstName':
-        if (value && !/^[a-zA-Z\s]+$/.test(value)) {
-          error = 'First name should only contain alphabets';
-        }
-        break;
-      default:
-        break;
-    }
-
-    setErrors(prev => ({ ...prev, [name]: error }));
-=======
     address: '',
     state: '',
     city: '',
@@ -140,6 +90,14 @@ function Register() {
       }
     }
 
+    if (name === 'email' && value) {
+      if (!value.endsWith('@gmail.com')) {
+        newErrors.email = 'Email must end with @gmail.com';
+      } else {
+        delete newErrors.email;
+      }
+    }
+
     setErrors(newErrors);
   };
 
@@ -170,28 +128,16 @@ function Register() {
 
     setFormData(updatedData);
     validateLive(name, value, updatedData);
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
   };
 
   const validateOnSubmit = () => {
     const newErrors = {};
-<<<<<<< HEAD
-    const requiredFields = ['role', 'firstName', 'password', 'phone', 'address'];
 
-    requiredFields.forEach(field => {
-      if (!formData[field].trim()) {
-        newErrors[field] = `${field} is required`;
-      }
-    });
-
-    setErrors(newErrors);
-=======
-
-    if (!formData.firstName) newErrors.firstName = 'First name is required';
+    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
     if (!formData.password) newErrors.password = 'Password is required';
     if (!formData.confirmPassword) newErrors.confirmPassword = 'Confirm password is required';
     if (!formData.phone) newErrors.phone = 'Phone number is required';
-    if (!formData.address) newErrors.address = 'Address is required';
+    if (!formData.address.trim()) newErrors.address = 'Address is required';
     if (!formData.stateId) newErrors.state = 'State is required';
     if (!formData.cityId) newErrors.city = 'City is required';
 
@@ -199,41 +145,20 @@ function Register() {
       newErrors.email = 'Email must end with @gmail.com';
     }
 
+    if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    if (formData.phone && !/^\d{10}$/.test(formData.phone)) {
+      newErrors.phone = 'Phone number must be exactly 10 digits';
+    }
+
     setErrors(prev => ({ ...prev, ...newErrors }));
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    if (!validateForm()) return;
-
-    setLoading(true);
-
-    try {
-      const registerData = {
-        Rid: formData.role === 'freelancer' ? 1 : 2,
-        Fname: formData.firstName,
-        Lname: formData.lastName || null,
-        Email: formData.email || null,
-        Pass: formData.password,
-        Phone: formData.phone,
-        Addr: formData.address,
-
-        // ✅ TEMP DEFAULTS (until DB APIs added)
-        State: 1,
-        City: 1
-      };
-
-      const response = await axios.post(
-        'https://localhost:7239/api/auth/register',
-        registerData
-      );
-
-      alert(response.data);
-
-=======
     setApiError('');
     setRegistrationSuccess(false);
 
@@ -260,10 +185,20 @@ function Register() {
         body: JSON.stringify(payload)
       });
 
-      if (!response.ok) throw new Error('Registration failed');
+      const text = await response.text();
+      let result;
+      
+      try {
+        result = text ? JSON.parse(text) : {};
+      } catch {
+        result = { message: text };
+      }
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Registration failed');
+      }
 
       setRegistrationSuccess(true);
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
       setFormData({
         role: 'freelancer',
         firstName: '',
@@ -272,16 +207,6 @@ function Register() {
         password: '',
         confirmPassword: '',
         phone: '',
-<<<<<<< HEAD
-        address: ''
-      });
-      setErrors({});
-    } catch (error) {
-      alert(error.response?.data || 'Registration failed!');
-      console.error(error);
-    } finally {
-      setLoading(false);
-=======
         address: '',
         state: '',
         city: '',
@@ -289,151 +214,249 @@ function Register() {
         cityId: ''
       });
       setErrors({});
+      setCities([]);
     } catch (err) {
       setApiError(err.message);
     } finally {
       setIsSubmitting(false);
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
     }
   };
 
   return (
-    <div className="auth-container">
-      <h2>Registration Form</h2>
-
-<<<<<<< HEAD
-      <form onSubmit={handleSubmit} className="auth-form">
-        <div className="form-group">
-          <label>Role *</label>
-=======
-      {apiError && <div className="api-error-banner">⚠️ {apiError}</div>}
-      {registrationSuccess && (
-        <div className="api-error-banner" style={{ background: '#eafaf1', color: '#1e8449' }}>
-          ✅ Registration successful
-        </div>
-      )}
-
-      <form className="register-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Role</label>
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
-          <select name="role" value={formData.role} onChange={handleChange}>
-            <option value="freelancer">Freelancer</option>
-            <option value="client">Client</option>
-          </select>
-<<<<<<< HEAD
-        </div>
-
-        <input name="firstName" placeholder="First Name" onChange={handleChange} />
-        <input name="lastName" placeholder="Last Name (Optional)" onChange={handleChange} />
-        <input name="email" placeholder="Email (Optional)" onChange={handleChange} />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-        <input name="phone" placeholder="Phone" onChange={handleChange} />
-        <textarea name="address" placeholder="Address" onChange={handleChange} />
-
-        <button disabled={loading}>
-          {loading ? 'Registering...' : 'Register'}
-        </button>
-      </form>
-
-      <p style={{ textAlign: 'center' }}>
-        Already registered? <Link to="/login">Login here</Link>
-=======
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>First Name</label>
-            <input name="firstName" value={formData.firstName} onChange={handleChange} />
-            {errors.firstName && <span className="error">{errors.firstName}</span>}
-          </div>
-
-          <div className="form-group">
-            <label>Last Name</label>
-            <input name="lastName" value={formData.lastName} onChange={handleChange} />
+    <div className="register-page">
+      <Navbar />
+      
+      <div className="register-container">
+        {/* Left Side - Background Image with Overlay Content */}
+        <div className="register-background-side">
+          <div className="background-overlay">
+            <div className="overlay-content">
+              <h1 className="company-name">WorkSphere</h1>
+              <h2 className="creative-title">Join Our Community of Professionals</h2>
+              <p className="background-description">
+                Register today and connect with thousands of skilled freelancers or 
+                find the perfect talent for your projects. Whether you're a service 
+                provider or looking for services, WorkSphere brings opportunities 
+                right to your fingertips.
+              </p>
+              <div className="feature-list">
+                <div className="feature-item">
+                  <span className="feature-icon">✓</span>
+                  <span>Create Your Professional Profile</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">✓</span>
+                  <span>Access Thousands of Projects</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">✓</span>
+                  <span>Secure Payment Protection</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">✓</span>
+                  <span>24/7 Support & Guidance</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="form-group">
-          <label>Email</label>
-          <input name="email" value={formData.email} onChange={handleChange} />
-          {errors.email && <span className="error">{errors.email}</span>}
+        {/* Right Side - Registration Form */}
+       <div className="register-form-side">
+  <div className="register-form-container">
+    <div className="form-header">
+      <h2>Create Account</h2>
+      <p className="form-subtitle">Join WorkSphere to start your journey</p>
+    </div>
+
+    {apiError && (
+      <div className="api-error-banner">
+        ⚠️ {apiError}
+      </div>
+    )}
+    
+    {registrationSuccess && (
+      <div className="success-banner">
+        ✅ Registration successful! <Link to="/login">Login here</Link>
+      </div>
+    )}
+
+    <form onSubmit={handleSubmit} className="register-form">
+      {/* Role Selection - Always visible at top */}
+      <div className="form-group role-selection">
+        <label>I want to register as:</label>
+        <div className="role-buttons">
+          <button
+            type="button"
+            className={`role-btn ${formData.role === 'freelancer' ? 'active' : ''}`}
+            onClick={() => setFormData({...formData, role: 'freelancer'})}
+          >
+            <span className="role-icon">👨‍💻</span>
+            <span className="role-text">Freelancer</span>
+            <span className="role-desc">Offer Services</span>
+          </button>
+          <button
+            type="button"
+            className={`role-btn ${formData.role === 'client' ? 'active' : ''}`}
+            onClick={() => setFormData({...formData, role: 'client'})}
+          >
+            <span className="role-icon">👔</span>
+            <span className="role-text">Client</span>
+            <span className="role-desc">Hire Talent</span>
+          </button>
         </div>
+      </div>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} />
-          {errors.password && <span className="error">{errors.password}</span>}
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="firstName">First Name *</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    placeholder="Enter first name"
+                  />
+                  {errors.firstName && <span className="error">{errors.firstName}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="lastName">Last Name</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    placeholder="Enter last name"
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="example@gmail.com"
+                />
+                {errors.email && <span className="error">{errors.email}</span>}
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="password">Password *</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Create password"
+                  />
+                  {errors.password && <span className="error">{errors.password}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="confirmPassword">Confirm Password *</label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="Confirm password"
+                  />
+                  {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="phone">Phone Number *</label>
+                <div className="input-with-prefix">
+                  <span className="prefix">+91</span>
+                  <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    maxLength="10"
+                    placeholder="Enter 10-digit number"
+                  />
+                </div>
+                {errors.phone && <span className="error">{errors.phone}</span>}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="address">Address *</label>
+                <textarea
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  placeholder="Enter your full address"
+                  rows="3"
+                />
+                {errors.address && <span className="error">{errors.address}</span>}
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="state">State *</label>
+                  <select
+                    id="state"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select State</option>
+                    {states.map(s => (
+                      <option key={s.id || s.stateId} value={s.name || s.stateName}>
+                        {s.name || s.stateName}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.state && <span className="error">{errors.state}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="city">City *</label>
+                  <select
+                    id="city"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    disabled={!formData.stateId}
+                  >
+                    <option value="">Select City</option>
+                    {cities.map(c => (
+                      <option key={c.id || c.cityId} value={c.name || c.cityName}>
+                        {c.name || c.cityName}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.city && <span className="error">{errors.city}</span>}
+                </div>
+              </div>
+
+              <button type="submit" className="register-btn" disabled={isSubmitting}>
+                {isSubmitting ? 'Creating Account...' : 'Create Account'}
+              </button>
+
+              <div className="login-link">
+                Already have an account? <Link to="/login">Sign in</Link>
+              </div>
+            </form>
+          </div>
         </div>
-
-        <div className="form-group">
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          />
-          {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Phone</label>
-          <input name="phone" value={formData.phone} onChange={handleChange} />
-          {errors.phone && <span className="error">{errors.phone}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Address</label>
-          <textarea name="address" value={formData.address} onChange={handleChange} />
-          {errors.address && <span className="error">{errors.address}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>State</label>
-          <select name="state" value={formData.state} onChange={handleChange}>
-            <option value="">Select State</option>
-            {states.map(s => (
-              <option key={s.id || s.stateId}>{s.name || s.stateName}</option>
-            ))}
-          </select>
-          {errors.state && <span className="error">{errors.state}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>City</label>
-          <select name="city" value={formData.city} onChange={handleChange} disabled={!formData.stateId}>
-            <option value="">Select City</option>
-            {cities.map(c => (
-              <option key={c.id || c.cityId}>{c.name || c.cityName}</option>
-            ))}
-          </select>
-          {errors.city && <span className="error">{errors.city}</span>}
-        </div>
-
-        <button className="submit-btn" disabled={isSubmitting}>
-          {isSubmitting ? 'Registering...' : 'Register'}
-        </button>
-      </form>
-
-      <p style={{ textAlign: 'center', marginTop: '25px' }}>
-        Already registered? <Link to="/login">Login</Link>
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
-      </p>
+      </div>
     </div>
   );
 }
 
 export default Register;
-  
-=======
-import React from 'react'
-
-function Register() {
-  return (
-    <div>Register</div>
-  )
-}
-
-export default Register
->>>>>>> parent of f44ebf5 (Merge branch 'Tejas' of https://github.com/Work-Sphere/WorkSphere)

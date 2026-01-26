@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-import './SharedAuth.css';
-=======
-import './Register.css';
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
+import Navbar from '../components/Navbar';
+import './Login.css';
 
 function Login() {
   const [number, setMobileNumber] = useState('');
@@ -45,15 +41,13 @@ function Login() {
 
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
       const text = await response.text();
+      let result;
 
-      let result = {};
       try {
         result = text ? JSON.parse(text) : {};
       } catch {
@@ -65,13 +59,7 @@ function Login() {
       }
 
       // ✅ SUCCESS
-      console.log('Login success:', result);
-
-      // OPTIONAL (if token is returned)
-      // localStorage.setItem('token', result.token);
-
       alert('Login successful');
-
       setMobileNumber('');
       setPassword('');
       setErrors({});
@@ -84,123 +72,114 @@ function Login() {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="auth-container">
-      <h2>Login</h2>
-      <form className="auth-form" onSubmit={handleLogin}>
-        <div className="form-group">
-          <label htmlFor="floatingInput">Mobile Number</label>
-          <input
-            type="text"
-            id="floatingInput"
-            placeholder="Mobile Number"
-            maxLength="10"
-            pattern="\d{10}"
-            title="Please enter exactly 10 digits"
-            value={number}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val === '' || /^\d+$/.test(val)) {
-                setMobileNumber(val);
-              }
-            }}
-            required
-          />
+    <div className="login-page">
+      <Navbar />
+      
+      <div className="login-container">
+        {/* Left Side - Background Image with Overlay Content */}
+        <div className="login-background-side">
+          <div className="background-overlay">
+            <div className="overlay-content">
+              <h1 className="company-name">WorkSphere</h1>
+              <h2 className="creative-title">Connect. Collaborate. Create.</h2>
+              <p className="background-description">
+                Your gateway to premium freelance services. Find skilled professionals 
+                for any project - from web development to home services, graphic design 
+                to consulting. Quality work delivered on time, every time.
+              </p>
+              <div className="feature-list">
+                <div className="feature-item">
+                  <span className="feature-icon">✓</span>
+                  <span>50,000+ Verified Professionals</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">✓</span>
+                  <span>200+ Service Categories</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">✓</span>
+                  <span>Secure Payment System</span>
+                </div>
+                <div className="feature-item">
+                  <span className="feature-icon">✓</span>
+                  <span>24/7 Customer Support</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="floatingPassword">Password</label>
-          <input
-            type="password"
-            id="floatingPassword"
-            placeholder="Password"
-            pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[@]).*$"
-            title="Must contain at least one uppercase letter, one number, one alphabet, and '@'"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        {/* Right Side - Login Form */}
+        <div className="login-form-side">
+          <div className="login-form-container">
+            <div className="form-header">
+              <h2>Welcome Back</h2>
+              <p className="form-subtitle">Sign in to access your WorkSphere account</p>
+            </div>
+
+            {apiError && (
+              <div className="api-error-banner">
+                ⚠️ {apiError}
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} className="login-form">
+              <div className="form-group">
+                <label htmlFor="mobile">Mobile Number *</label>
+                <div className="input-with-prefix">
+                  <input
+                    type="text"
+                    id="mobile"
+                    value={number}
+                    maxLength="10"
+                    placeholder="Enter 10-digit number"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val === '' || /^\d+$/.test(val)) {
+                        setMobileNumber(val);
+                      }
+                    }}
+                  />
+                </div>
+                {errors.number && <span className="error">{errors.number}</span>}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password">Password *</label>
+                <div className="password-input">
+                  <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    placeholder="Enter your password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button type="button" className="show-password-btn" onClick={() => {}}>
+                    👁
+                  </button>
+                </div>
+                {errors.password && <span className="error">{errors.password}</span>}
+              </div>
+
+              <div className="form-options">
+                <Link to="/forgot-password" className="forgot-link">
+                  Forgot Password?
+                </Link>
+              </div>
+
+              <button type="submit" className="login-btn" disabled={isSubmitting}>
+                {isSubmitting ? 'Signing in...' : 'Sign In'}
+              </button>
+
+              <div className="signup-link">
+                Don't have an account? <Link to="/register">Sign up</Link>
+              </div>
+            </form>
+          </div>
         </div>
-
-        <div className="mb-3" style={{ textAlign: 'center' }}>
-          <Link to="/forgot-password" style={{ color: '#3498db', textDecoration: 'none', fontWeight: '600' }}>
-            Forgot Password?
-          </Link>
-        </div>
-
-        <div className="button-group">
-          <button className="submit-btn" type="submit">
-            Sign in
-          </button>
-          <Link to="/register" className="submit-btn" style={{ background: 'transparent', border: '2px solid #95a5a6', color: '#95a5a6', textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
-            Register
-          </Link>
-        </div>
-      </form>
-=======
-    <div className="register-container">
-      <h2>Login</h2>
-
-      {apiError && (
-        <div className="api-error-banner">
-          ⚠️ {apiError}
-        </div>
-      )}
-
-      <form onSubmit={handleLogin} className="register-form">
-        <div className="form-group">
-          <label>Mobile Number *</label>
-          <input
-            type="text"
-            value={number}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val === '' || /^\d+$/.test(val)) {
-                setMobileNumber(val);
-              }
-            }}
-            maxLength="10"
-          />
-          {errors.number && <span className="error">{errors.number}</span>}
-        </div>
-
-        <div className="form-group">
-          <label>Password *</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {errors.password && <span className="error">{errors.password}</span>}
-        </div>
-
-        <button type="submit" className="submit-btn" disabled={isSubmitting}>
-          {isSubmitting ? 'Signing in...' : 'Sign In'}
-        </button>
-      </form>
-
-      <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <p>
-          <Link to="/forgot-password">Forgot Password?</Link>
-        </p>
-        <p>
-          Don&apos;t have an account? <Link to="/register">Register here</Link>
-        </p>
       </div>
->>>>>>> 51d3d022c4b594d44842d1264134c195eb7180c7
     </div>
   );
 }
 
 export default Login;
-=======
-import React from 'react'
-
-function Login() {
-  return (
-    <div>Login</div>
-  )
-}
-
-export default Login
->>>>>>> parent of f44ebf5 (Merge branch 'Tejas' of https://github.com/Work-Sphere/WorkSphere)
