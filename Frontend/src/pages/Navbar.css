@@ -16,7 +16,8 @@
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(46, 230, 166, 0.2);
   box-sizing: border-box;
-  max-height: 60px;
+ max-height: 60px;
+ 
 }
 
 /* LOGO with Lift-up and Text Shadow Effect */

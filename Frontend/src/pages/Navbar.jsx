@@ -36,7 +36,9 @@ function Navbar() {
   return (
     <nav className="home-navbar">
       {/* LOGO */}
-      <div className="logo">WorkSphere</div>
+     
+
+      <Link to="/" className="logo">WorkSphere</Link>
 
       {/* NAVIGATION LINKS */}
       <div className="nav-menu">

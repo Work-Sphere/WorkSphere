@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import Navbar from './Navbar';
 import './Login.css';
 
+// 1. Import the hook
+import { useNavigate } from 'react-router-dom';
+
 function Login() {
+  const navigate = useNavigate();// 2. Initialize the hook
   const [number, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -11,6 +15,14 @@ function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const API_BASE_URL = '/api';
+
+
+  // LOgin check 
+  const ROLE_MAP = {
+    1: "admin",
+    2: "freelancer",
+    3: "client",
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -59,7 +71,20 @@ function Login() {
       }
 
       // ✅ SUCCESS
-      alert('Login successful');
+        ///Conditional Login Check 
+      const role = ROLE_MAP[result.rid];
+
+      // ✅ SUCCESS
+      if (role === "admin") {
+        navigate("/admin");
+      } else if (role === "freelancer") {
+        navigate("/freelancer");
+      } else if (role === "client") {
+        navigate("/client");
+      } else {
+        navigate("/");
+      }
+
       setMobileNumber('');
       setPassword('');
       setErrors({});

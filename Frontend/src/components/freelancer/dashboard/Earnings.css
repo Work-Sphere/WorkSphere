@@ -1,0 +1,105 @@
+.earnings-container {
+  width: 100%;
+}
+
+.page-title, .section-title {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+/* Earnings Summary Grid */
+.earnings-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.balance-card {
+  background-color: rgba(25, 135, 84, 0.1); /* Success green tint */
+  border-color: rgba(25, 135, 84, 0.25);
+}
+
+.balance-card .stat-value { color: #198754; }
+
+.pending-card {
+  background-color: rgba(13, 202, 240, 0.1); /* Info blue tint */
+  border-color: rgba(13, 202, 240, 0.25);
+}
+
+.pending-card .stat-value { color: #0dcaf0; }
+
+.stat-label {
+  color: #a0a0a0;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Table Styles */
+.table-wrapper {
+  overflow-x: auto; /* Replaces table-responsive */
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #ffffff;
+  text-align: left;
+}
+
+.transaction-table thead {
+  background-color: #e9ecef; /* Matching table-secondary */
+  color: #212529;
+}
+
+.transaction-table th, 
+.transaction-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.transaction-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Matching table-hover */
+}
+
+.amount-cell {
+  font-weight: 700;
+}
+
+/* Badge Styles */
+.status-badge {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.status-badge.paid {
+  background-color: #198754;
+  color: #ffffff;
+}
+
+.status-badge.pending {
+  background-color: #ffc107;
+  color: #212529;
+}

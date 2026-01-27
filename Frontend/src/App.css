@@ -1,9 +1,17 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  text-align: center;} */
+  #root {
+  width: 100%;       /* Remove the 1280px limit */
+  margin: 0;         /* Remove the '0 auto' which centers the page */
+  padding: 0;        /* Remove the side gaps */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
 
 .logo {
   height: 6em;

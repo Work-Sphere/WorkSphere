@@ -55,29 +55,14 @@ function Home() {
         </section>
 
         {/* STATS */}
-        <section className="stats-section">
-          <div className="stat">
-            <h2>300k+</h2>
-            <p>Professionals</p>
-          </div>
-          <div className="stat">
-            <h2>50+</h2>
-            <p>Service Categories</p>
-          </div>
-          <div className="stat">
-            <h2>1M+</h2>
-            <p>Jobs Completed</p>
-          </div>
-        </section>
+        
       </main>
 
       {/* FOOTER */}
       <footer className="home-footer">
         <p>© 2026 WorkSphere. All rights reserved.</p>
         <div className="footer-links">
-          <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          
         </div>
       </footer>
     </div>

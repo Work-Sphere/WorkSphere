@@ -43,16 +43,20 @@ html, body {
 }
 
 .hero-section h1 {
+  text-align: center;
   font-size: 48px;
   line-height: 1.2;
   margin-bottom: 20px;
 }
 
 .hero-section span {
-  color: #2ee6a6;
+  color: #2ee6a6; 
 }
 
 .hero-subtext {
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
   font-size: 18px;
   
 
@@ -62,6 +66,7 @@ html, body {
    SERVICES
    ========================= */
 .services-section {
+  text-align: center;
   margin-top: 70px;
 }
 
