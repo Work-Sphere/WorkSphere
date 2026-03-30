@@ -1,0 +1,228 @@
+/* =========================
+   NAVBAR (MEDIUM HEIGHT)
+   ========================= */
+.home-navbar {
+  position: fixed; /* Changed to fixed */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 32px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(46, 230, 166, 0.2);
+  box-sizing: border-box;
+  max-height: 60px;
+ 
+}
+
+/* LOGO with Lift-up and Text Shadow Effect */
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: #2ee6a6;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Hover Effect: Lift up and text shadow only */
+.logo:hover {
+  color: #2ee6a6;
+  transform: translateY(-2px); /* Lift up effect */
+  text-shadow: 0 4px 8px rgba(46, 230, 166, 0.3); /* Text shadow instead of box shadow */
+}
+
+/* Alternative: With both text shadow and glow */
+/*
+.logo:hover {
+  color: #2ee6a6;
+  transform: translateY(-2px);
+  text-shadow: 
+    0 2px 4px rgba(46, 230, 166, 0.2),
+    0 0 15px rgba(46, 230, 166, 0.1); /* Combined effects * /
+}
+*/
+
+/* Active/Click effect */
+.logo:active {
+  transform: translateY(0); /* Press down effect */
+  text-shadow: 0 2px 4px rgba(46, 230, 166, 0.15); /* Reduced shadow */
+}
+
+/* NAVIGATION MENU */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin: 0;
+  padding: 0 40px;
+}
+
+.nav-link, .nav-link-btn {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 0;
+  position: relative;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-link:hover, .nav-link-btn:hover {
+  color: #2ee6a6;
+}
+
+.nav-link::after, .nav-link-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #2ee6a6;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after, .nav-link-btn:hover::after {
+  width: 100%;
+}
+
+/* SEARCH BAR */
+.search-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30px;
+  margin: 0;
+}
+
+.search-box input {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 1px solid rgba(46, 230, 166, 0.3);
+  outline: none;
+  font-size: 14px;
+  height: 40px;
+  line-height: normal;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.search-box input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-box input:focus {
+  border-color: #2ee6a6;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 15px rgba(46, 230, 166, 0.3);
+}
+
+/* NAV LINKS - Right side */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  height: 44px;
+}
+
+.nav-login {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  transition: color 0.3s ease;
+}
+
+.nav-login:hover {
+  color: #2ee6a6;
+}
+
+.nav-signup {
+  background: linear-gradient(135deg, #2ee6a6, #1abc9c);
+  color: #000;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 15px;
+  line-height: normal;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-signup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46, 230, 166, 0.4);
+}
+
+/* DYNAMIC NAV STYLES */
+.user-nav-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.welcome-msg {
+  color: #2ee6a6;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.nav-logout {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ff4d4d;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-logout:hover {
+  background: #ff4d4d;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 77, 77, 0.3);
+}

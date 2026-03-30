@@ -1,0 +1,25 @@
+.admin-ratings {
+  padding: 20px;
+}
+
+.rating-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.rating-item {
+  margin-top: 10px;
+}
+
+.rating-item hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 10px 0;
+}
+
+.error {
+  color: #e74c3c;
+  font-weight: bold;
+}

@@ -1,0 +1,97 @@
+/* ===============================
+   Layout Containers
+================================ */
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at top, #0f3d32, #050505 70%);
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.dashboard-main-area {
+  margin-top: 4%;
+  display: flex;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ===============================
+   Sidebar Styling
+================================ */
+.sidebar {
+  width: 280px;
+  background-color: rgba(20, 20, 20, 0.8);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  flex-shrink: 0;
+}
+
+/* ===============================
+   Navigation Menu
+================================ */
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li {
+  margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-nav a i {
+  margin-right: 12px;
+  font-size: 1.1rem;
+}
+
+/* ===============================
+   Hover & Active States
+================================ */
+.sidebar-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.sidebar-nav a.active {
+  background-color: #0f3d32;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ===============================
+   Main Content Area
+================================ */
+.dashboard-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 45px 40px;
+  background-color: transparent;
+}
+
+/* ===============================
+   Scrollbar Styling (Dark UI)
+================================ */
+.dashboard-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-content::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}

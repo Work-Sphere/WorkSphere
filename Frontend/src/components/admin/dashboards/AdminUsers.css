@@ -1,0 +1,79 @@
+.admin-users {
+  padding: 20px;
+}
+
+/* Table layout */
+.admin-users table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+/* Header styling */
+.admin-users th {
+  padding: 12px;
+  text-align: left;
+  color: #fdfdfd;           /* ✅ App theme color */
+  border-bottom: 2px solid #2ee6a6;
+  font-weight: 600;
+}
+
+/* Table row styling */
+.admin-users td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(46, 230, 166, 0.3);
+}
+
+/* Hover effect (optional but looks good) */
+.admin-users tbody tr:hover {
+  background-color: rgba(46, 230, 166, 0.08);
+}
+.block-btn {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.unblock-btn {
+  background-color: #2ee6a6;
+  color: black;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+/* ============================= */
+/* Approve / Reject Buttons */
+/* ============================= */
+
+.approve-btn {
+  background-color: #2ee6a6;   /* Same theme green */
+  color: #000;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.reject-btn {
+  background-color: #ff4d4d;   /* Soft red */
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Optional hover effects */
+.approve-btn:hover {
+  background-color: #26c892;
+}
+
+.reject-btn:hover {
+  background-color: #e63c3c;
+}
+
+
+
+

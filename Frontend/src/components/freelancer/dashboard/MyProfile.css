@@ -1,0 +1,192 @@
+/* =====================================================
+   MY PROFILE – CLEAN, NO EXTRA BACKGROUND
+   ===================================================== */
+
+/* ===== SCOPE (NO BACKGROUND HERE) ===== */
+.myprofile-scope {
+  width: 100%;
+  padding: 40px 0 60px;
+  color: #e5e7eb;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ===== ROOT CONTAINER ===== */
+.myprofile-scope .profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== HEADER ===== */
+.myprofile-scope .profile-header {
+  margin-bottom: 24px;
+}
+
+.myprofile-scope .page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* ===== ERROR ===== */
+.myprofile-scope .error-toast {
+  margin-top: 10px;
+  background: #7f1d1d;
+  color: #fecaca;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* ===== CARD ===== */
+.myprofile-scope .profile-card {
+  background: rgba(2, 6, 23, 0.92); /* blends with dashboard */
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+/* ===== CARD HEADER ===== */
+.myprofile-scope .profile-header-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.myprofile-scope .profile-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2ee6a6, #1abc9c);
+}
+
+/* ===== PROFILE INFO ===== */
+.myprofile-scope .profile-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.myprofile-scope .profile-id {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* ===== CONTENT ===== */
+.myprofile-scope .profile-content {
+  padding: 30px;
+}
+
+/* ===== ROWS ===== */
+.myprofile-scope .profile-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.myprofile-scope .profile-row:last-child {
+  border-bottom: none;
+}
+
+.myprofile-scope .profile-label {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.myprofile-scope .profile-value {
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* ===== INPUTS ===== */
+.myprofile-scope .profile-input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: #ffffff;
+}
+
+.myprofile-scope .profile-input:focus {
+  outline: none;
+  border-color: #2ee6a6;
+  box-shadow: 0 0 0 3px rgba(46, 230, 166, 0.35);
+}
+
+/* ===== ACTIONS ===== */
+.myprofile-scope .profile-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+/* ===== BUTTONS ===== */
+.myprofile-scope .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.myprofile-scope .btn-primary {
+  background: linear-gradient(135deg, #2ee6a6, #1abc9c);
+  color: #022c22;
+}
+
+.myprofile-scope .btn-secondary {
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ===== SPINNER ===== */
+.myprofile-scope .spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ===== LOADING ===== */
+.myprofile-scope .loading-spinner {
+  padding: 40px;
+  text-align: center;
+  color: #cbd5f5;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .myprofile-scope .profile-row {
+    grid-template-columns: 1fr;
+  }
+
+  .myprofile-scope .profile-header-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .myprofile-scope .profile-actions {
+    flex-direction: column;
+  }
+}
+
+/* ===== ANIMATION ===== */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

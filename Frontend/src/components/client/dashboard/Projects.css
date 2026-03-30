@@ -1,0 +1,89 @@
+.client-projects {
+  padding: 20px;
+}
+
+.projects-header {
+  margin-bottom: 20px;
+}
+
+.project-card {
+  background: rgba(20, 20, 20, 0.8);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.project-main p {
+  margin: 4px 0;
+}
+
+.view-requests-btn {
+  margin-top: 10px;
+  background: #0f3d32;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.requests-box {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.requests-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.request-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.accept-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reject-btn {
+  background: #e57373;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.status {
+  margin-left: 4px;
+  font-weight: bold;
+}
+
+.status.pending {
+  color: #ffc107;
+}
+
+.status.accepted {
+  color: white;
+}
+
+.status.rejected {
+  color: white;
+}
+
+.accepted-msg {
+  margin-left: 10px;
+  color: #4caf50;
+  font-size: 0.9rem;
+}

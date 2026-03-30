@@ -1,0 +1,121 @@
+.projects-container {
+  width: 100%;
+}
+
+.projects-title {
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+/* Table Layout */
+.projects-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #ffffff;
+  text-align: left;
+}
+
+.projects-table thead {
+  background-color: #dee2e6;
+  /* Bootstrap secondary header look */
+  color: #212529;
+}
+
+.projects-table th,
+.projects-table td {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.projects-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: background 0.2s ease;
+}
+
+.project-name {
+  font-weight: 600;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50px;
+  /* Pill style */
+  display: inline-block;
+}
+
+.status-badge.completed {
+  background-color: #198754;
+  color: white;
+}
+
+.status-badge.in-progress {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.status-badge.pending {
+  background-color: #6c757d;
+  color: white;
+}
+
+.status-badge.paid {
+  background-color: #10b981;
+  color: white;
+}
+
+.payment-requested {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50px;
+  background-color: #3b82f6;
+  color: white;
+  display: inline-block;
+}
+
+/* Action Buttons */
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-action {
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-action.view {
+  border: 1px solid #0dcaf0;
+  color: #0dcaf0;
+}
+
+.btn-action.view:hover {
+  background: #0dcaf0;
+  color: #000;
+}
+
+.btn-action.edit {
+  border: 1px solid #f8f9fa;
+  color: #f8f9fa;
+}
+
+.btn-action.edit:hover {
+  background: #f8f9fa;
+  color: #000;
+}

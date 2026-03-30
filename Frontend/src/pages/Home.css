@@ -1,0 +1,231 @@
+/* =========================
+   GLOBAL
+   ========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #0f3d32, #050505 70%);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* =========================
+   LAYOUT
+   ========================= */
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px; /* This pushes ALL content below the fixed navbar */
+}
+
+/* =========================
+   MAIN - ADJUSTED FOR FIXED NAVBAR
+   ========================= */
+.home-main {
+  flex: 1;
+  padding: 40px 60px 0 60px; /* Reduced top padding since navbar is fixed */
+  margin-top: 0; /* Remove any top margin */
+}
+
+/* =========================
+   HERO
+   ========================= */
+.hero-section {
+  padding-top: 20px; /* Adjust this if you want more/less space after navbar */
+}
+
+.hero-section h1 {
+  text-align: center;
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-section span {
+  color: #2ee6a6; 
+}
+
+.hero-subtext {
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
+  font-size: 18px;
+  
+
+}
+
+/* =========================
+   SERVICES
+   ========================= */
+.services-section {
+  text-align: center;
+  margin-top: 70px;
+}
+
+.services-section h3 {
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+.services-scroll {
+  width: 100%;
+  overflow: hidden;
+  padding: 40px 0;
+  position: relative;
+}
+
+.services-track {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  animation: scroll 30s linear infinite;
+}
+
+.services-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-290px * 7 - 30px * 7)); } /* card width + gap * count */
+}
+
+.service-card {
+  min-width: 290px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  padding: 30px;
+  color: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(46, 230, 166, 0.4);
+}
+
+.service-icon {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.service-card h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.service-card p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* =========================
+   SEARCH RESULTS VIEW
+   ========================= */
+.is-searching .services-track {
+  animation: none !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  transform: none !important;
+  width: 100%;
+}
+
+.no-results {
+  padding: 40px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #2ee6a6;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  width: 100%;
+}
+
+/* =========================
+   STATS
+   ========================= */
+.stats-section {
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.stat h2 {
+  font-size: 36px;
+  color: #2ee6a6;
+}
+
+.stat p {
+  opacity: 0.8;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+.home-footer {
+  padding: 25px 60px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Pushes footer to bottom */
+}
+
+.footer-links a {
+  margin-left: 20px;
+  color: #2ee6a6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 768px) {
+  .home-container {
+    padding-top: 60px; /* Keep same padding for mobile */
+  }
+
+  .home-main {
+    padding: 30px 25px 0 25px; /* Adjusted for mobile */
+  }
+
+  .hero-section h1 {
+    font-size: 34px;
+  }
+
+  .stats-section {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .home-footer {
+    padding: 20px 25px;
+  }
+}
+
+/* Additional mobile optimization */
+@media (max-width: 480px) {
+  .home-main {
+    padding: 20px 15px 0 15px;
+  }
+  
+  .hero-section h1 {
+    font-size: 28px;
+  }
+  
+  .service-card {
+    min-width: 220px;
+    padding: 20px;
+  }
+}

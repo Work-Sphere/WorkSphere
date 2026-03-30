@@ -1,0 +1,95 @@
+/* ===============================
+   Project Card (Ratings.jsx)
+================================ */
+.project-card {
+  background: rgba(15, 61, 50, 0.35);
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 25px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===============================
+   Rating Form Container
+================================ */
+.rate-box {
+  background: rgba(15, 61, 50, 0.35);
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Labels */
+.rate-box label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #d0e6df;
+}
+
+/* ===============================
+   Inputs (Select + Textarea)
+================================ */
+.rate-box select,
+.rate-box textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.45);   /* 🔥 DARK GLASS */
+  color: #ffffff;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Textarea specifics */
+.rate-box textarea {
+  min-height: 64px;
+  resize: none;
+}
+
+/* Dropdown options (important) */
+.rate-box select option {
+  background-color: #0f3d32;
+  color: #ffffff;
+}
+
+/* ===============================
+   Focus Effects (Polish)
+================================ */
+.rate-box select:focus,
+.rate-box textarea:focus {
+  outline: none;
+  border-color: rgba(20, 120, 95, 0.9);
+  box-shadow: 0 0 0 1px rgba(20, 120, 95, 0.6);
+}
+
+/* ===============================
+   Submit Button
+================================ */
+.rate-box button {
+  background: linear-gradient(135deg, #0f3d32, #145a47);
+  color: #ffffff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+/* Hover */
+.rate-box button:hover {
+  background: linear-gradient(135deg, #145a47, #1b6f5a);
+  transform: translateY(-1px);
+}
+
+/* Disabled */
+.rate-box button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}

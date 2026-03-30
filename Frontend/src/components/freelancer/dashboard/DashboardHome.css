@@ -1,0 +1,80 @@
+/* Container Spacing */
+.dashboard-content-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+ 
+}
+
+
+/* Header Styles */
+.dashboard-header {
+   font-weight: 100;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header .title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+
+.dashboard-header .subtitle {
+  color: #a0a0a0;
+  margin-top: 0.5rem;
+}
+
+/* Stats Grid - Replaces Bootstrap Row/Col */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem; /* Replaces g-4 */
+}
+
+/* The Card Style */
+.stat-card {
+  background: rgba(255, 255, 255, 0.05); /* Subtle dark glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Typography inside cards */
+.stat-label {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+
+/* Icons */
+.stat-icon {
+  font-size: 2.5rem;
+}
+
+.icon-primary { color: #0d6efd; }
+.icon-success { color: #198754; }
+.icon-info { color: #0dcaf0; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr; /* Stack cards on mobile */
+  }
+}

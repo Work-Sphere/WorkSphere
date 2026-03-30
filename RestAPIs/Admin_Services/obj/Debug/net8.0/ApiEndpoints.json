@@ -1,0 +1,259 @@
+[
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.AuthController",
+    "Method": "AdminLogin",
+    "RelativePath": "api/admin/auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Admin_Services.DTOs.AdminLoginRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.ComplaintsController",
+    "Method": "GetAllComplaints",
+    "RelativePath": "api/admin/complaints",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.ComplaintsController",
+    "Method": "GetComplaintById",
+    "RelativePath": "api/admin/complaints/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.ComplaintsController",
+    "Method": "BlockUnblockUser",
+    "RelativePath": "api/admin/complaints/block-user",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Admin_Services.DTOs.StatusUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.DashboardController",
+    "Method": "GetDashboardSummary",
+    "RelativePath": "api/admin/dashboard/summary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.RatingsController",
+    "Method": "GetAllRatings",
+    "RelativePath": "api/admin/ratings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.RatingsController",
+    "Method": "GetRatingById",
+    "RelativePath": "api/admin/ratings/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.ServicesController",
+    "Method": "GetAllServices",
+    "RelativePath": "api/admin/services",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.ServicesController",
+    "Method": "AddService",
+    "RelativePath": "api/admin/services",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ServiceDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.ServicesController",
+    "Method": "UpdateService",
+    "RelativePath": "api/admin/services/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ServiceDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.ServicesController",
+    "Method": "DeleteService",
+    "RelativePath": "api/admin/services/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.UsersController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/admin/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.UsersController",
+    "Method": "ApproveUser",
+    "RelativePath": "api/admin/users/approve",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Admin_Services.DTOs.StatusUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.UsersController",
+    "Method": "BlockUnblockUser",
+    "RelativePath": "api/admin/users/block",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Admin_Services.DTOs.StatusUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.UsersController",
+    "Method": "ToggleBlockUser",
+    "RelativePath": "api/admin/users/block-toggle/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.UsersController",
+    "Method": "GetPendingUsers",
+    "RelativePath": "api/admin/users/pending",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.UsersController",
+    "Method": "RejectUser",
+    "RelativePath": "api/admin/users/reject",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Admin_Services.DTOs.StatusUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Admin_Services.Controllers.Admin.UsersController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/admin/users/reset-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Admin_Services.DTOs.PasswordResetDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
